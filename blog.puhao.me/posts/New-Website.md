@@ -3,8 +3,11 @@ title: New Website
 date: '2013-08-21'
 description:
 categories:
-
+- 吐槽
 tags:
+- 写作
+- blog
+- github
 
 ---
 在停止创作了N年之后，我又开始我的写作生涯了。一直想建立个自己的blog，最早想用wordpress这个框架，后来不了了之。后面自己接触到了markdown，然后觉得直接用markdown来写blog是一件多么酷的事情，然后把blog托管在github上面。  
