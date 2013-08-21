@@ -1,0 +1,16 @@
+title : Puhao's Blog
+tagline: Blog Tagline
+author :
+  name : Puhao Yuan
+  email : yuanpuhao@gmail.com
+  github : puhao
+  twitter : xxoo
+  feedburner : ooxx
+
+navigation :
+  - archive.html
+  - tags.html
+  - categories.html
+  - pages.html
+  - about.md
+  
