@@ -4,7 +4,17 @@
 		<loc>http://blog.puhao.me/</loc>
 	</url>
 	<url>
-		<loc>http://blog.puhao.me/default/New-Website/</loc>
+		<loc>http://blog.puhao.me/吐槽/Blog%E6%8A%98%E8%85%BE/</loc>
+		<lastmod>2013-08-22</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://blog.puhao.me/随想/%E8%AE%B0%E5%BF%86/</loc>
+		<lastmod>2013-08-21</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://blog.puhao.me/吐槽/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</loc>
 		<lastmod>2013-08-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>

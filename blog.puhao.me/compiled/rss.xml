@@ -2,10 +2,22 @@
 <rss version="2.0">  <channel>
     <title>Puhao&#39;s Blog</title>
     <link>http://blog.puhao.me</link>
-    <pubDate>2013-08-21 08:52:22 +0800</pubDate>
+    <pubDate>2013-08-22 07:17:25 +0800</pubDate>
     <item>
-      <title>New Website</title>
-      <link>http://blog.puhao.me/default/New-Website/</link>
+      <title>Blog折腾</title>
+      <link>http://blog.puhao.me/吐槽/Blog%E6%8A%98%E8%85%BE/</link>
+      <pubDate>2013-08-22 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;在程序界有一句话很流行,不要重复造轮子。哦，我不是来讨论&lt;a href=&#34;http://taosay.net/?p=575&#34;&gt;重复造轮子&lt;/a&gt;这件事情的。&lt;br /&gt;&#xA;昨天用gor生成了自己的blog，然后我折腾的本性又显示出来了，当然要添加点自己的玩意，随着折腾进行发现自己又陷入了程序员重复造轮子的话题。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;气象站数据&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;第一个想到的当然是我的&lt;a href=&#34;https://github.com/Puhao/ecomesh&#34;&gt;气象站&lt;/a&gt;数据问题。我现在的数据直接转发到了&lt;a href=&#34;http://www.yeelink.net/&#34;&gt;Yeelink&lt;/a&gt;，顺便发发&lt;a href=&#34;点击查看微博&#34;&gt;微博&lt;/a&gt;。&lt;a href=&#34;http://www.yeelink.net/devices/3762#&#34;&gt;平台曲线&lt;/a&gt;展示了我阳台最近的天气变化。&lt;br /&gt;&#xA;但是我想着在这个blog也能展示曲线，我想到的就是我本来用raspberry pi采集数据的存储到本地MySQL数据库的，自己只需再写个后台服务程序，然后前端用个JQuery的库，比如Highcharts,前端还能做个ajax数据交互，实时更新。&#xA;我看了&lt;a href=&#34;http://hugozhu.myalert.info/&#34;&gt;别人的做法&lt;/a&gt;（其实我更想用山寨这个词语，我最擅长的就是模仿，Orz),直接使用了第三方的物联网平台&amp;ndash;&lt;a href=&#34;https://xively.com/&#34;&gt;xively&lt;/a&gt;。&lt;br /&gt;&#xA;中国版的物联网开发平台相比之下，真的是模仿了它的外形，但是没有把其它一些辅助的功能做好。提供一个app-key，post接口让大家传数据，但是没有考虑到第三方网站的外链之类的。毕竟国内做物联网的平台的，boss更多是做嵌入式出身，身上少了些互联网基因。&lt;br /&gt;&#xA;我知道我不应该再造个轮子了，直接用别人的工具吧。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;关于我的气象站，等我把其它部件整完了，我专门写篇Blog来介绍下。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;评论，分享&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;原来gor里面集成了disqus，但是毕竟这个里面关联的账号啊都是twitter，facebook，天朝用户都是weibo啊，人人啊之类的账号，果然我就发现了中国版的disqus， &lt;a href=&#34;http://www.uyan.cc/&#34;&gt;友言&lt;/a&gt;。然后发现&lt;a href=&#34;http://www.jiathis.com/&#34;&gt;加网&lt;/a&gt;提供了我们最需要的一键分享功能，而且他们两个是一家公司的。&lt;br /&gt;&#xA;然后我看了下，自己是不是要学下go语言，然后gor里面折腾下，让这个功能支持？还是先在github里面提交了一个issue。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;主页改动&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;当然首页风格也是需要改改的，非常好，gor使用了bootstrap这套框架，因此自己改动页面也非常方便。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;增加轮子&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;前面提到的xively，disqus，友言，加网，bootstrap这些东西都非常好用，只需要在HTML里面加入一些元素就实现了，这些轮子真的做到了组装方便，让我们这些没有技术含量的“系统集成商”非常喜欢。&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;结尾吐槽&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;自己用人人这样的SNS，还有weibo，又搞这个blog干神马了？这不就是个重复造了个大轮子？其实我就是喜欢造轮子，一般人我不告诉他。&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>记忆</title>
+      <link>http://blog.puhao.me/随想/%E8%AE%B0%E5%BF%86/</link>
+      <pubDate>2013-08-21 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;自从接触了markdown之后，我就突然又爱上了写作，突然又想写点什么了，然而有时候也只是写在日记本里。每当自己翻开大学时候写的日记，总想对那个毛头小孩说句：少年，你too young，too simple。成长是一种说不出的滋味。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;今天是中元节，前天妈妈跟我打电话说了，今天家里要过节，要给爷爷烧点什么。由于今天下午已经和别人约好了谈事情，我也就没有回家，错过了一次家庭聚餐。不知道从什么时候开始，我开始非常喜欢这样的聚餐，总觉得这个时候是最幸福的时刻。爷爷刚过世那几天，姨夫也每天来乡下，然后舅舅他们什么的，都会来乡下大家坐下来一起吃饭，喝个小酒。那样的日子，一个个从这个大家庭走出去成家立业的人，在人生50岁的时候又回到了大家庭，这种感觉真的太好了，这是爷爷留给我们的。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;记得爷爷五七那天，大家围着那座纸房子把过旺的火焰扑灭，舅舅们正好围成一个圈，那种画面似乎会永远停留在心中，有一种说不出的滋味。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;爷爷是在4月30日的凌晨1：50过世的，我清楚的记得他弥留时候的情景，自己有时候恍惚中会在脑海中想起。当看着一个自己熟悉的人，总到生命最后的尽头，总能悟道一些以前不曾明白的道理。就像当时阿姨说的，就好像看着一艘大船慢慢沉下去，船对于我们来说，有一种特殊的意思。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;现在大家的话题都是弄简历，做题，看算法，找工作，比较薪酬待遇，而我似乎还没有进入这个状态，我总是在疑惑着，这一切都是为了什么？&lt;/p&gt;&#xA;&#xA;&lt;p&gt;少年，醒醒！该搬砖了！！恩，人艰不拆，莫装逼，装逼遭雷劈，等你找不到工作了就哭去吧！！&lt;/p&gt;&#xA;</description>
+    </item>
+    <item>
+      <title>新的开始</title>
+      <link>http://blog.puhao.me/吐槽/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</link>
       <pubDate>2013-08-21 12:00:00 +0800</pubDate>
       <description>&lt;p&gt;在停止创作了N年之后，我又开始我的写作生涯了。一直想建立个自己的blog，最早想用wordpress这个框架，后来不了了之。后面自己接触到了markdown，然后觉得直接用markdown来写blog是一件多么酷的事情，然后把blog托管在github上面。&lt;br /&gt;&#xA;查了一些相关的教程，怎么利用github的page来写文章，但是感觉虽然很geek，但是很烦。终于当我看到了gor，发现这些麻烦的事情又被简化了很多，我立马就动手完成了这个blog。不过作为一个码农，是否惭愧，本来这些简化的事情就是应该是geeker干的事情，结果却沦为了一个只会使用别人工具的码农，o(╯□╰)o。&lt;br /&gt;&#xA;另外，我左手上带着一个fitbit flex，然后作为一个geeker，你懂得。&lt;br /&gt;&#xA;神马？需求变复杂了？静态页面展示不了了？别忘了我还有raspberry pi呢。&lt;/p&gt;&#xA;</description>
     </item>
