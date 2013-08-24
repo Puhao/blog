@@ -4,6 +4,16 @@
 		<loc>http://blog.puhao.me/</loc>
 	</url>
 	<url>
+		<loc>http://blog.puhao.me/FPGA/FPGA%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
+		<lastmod>2013-08-24</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://blog.puhao.me/吐槽/%E4%BD%BF%E7%94%A8%E5%A4%9A%E8%AF%B4/</loc>
+		<lastmod>2013-08-22</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://blog.puhao.me/吐槽/Blog%E6%8A%98%E8%85%BE/</loc>
 		<lastmod>2013-08-22</lastmod>
 		<changefreq>weekly</changefreq>

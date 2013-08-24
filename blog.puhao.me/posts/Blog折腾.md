@@ -9,8 +9,8 @@ tags:
 - xively
 - 友言
 - 加网
-- github
-- bootstrap
+- GitHub
+- Bootstrap
 - raspberry pi
 - 气象站
 ---
@@ -19,7 +19,7 @@ tags:
 
 气象站数据
 ---
-第一个想到的当然是我的[气象站](https://github.com/Puhao/ecomesh)数据问题。我现在的数据直接转发到了[Yeelink](http://www.yeelink.net/)，顺便发发[微博](点击查看微博)。[平台曲线](http://www.yeelink.net/devices/3762#)展示了我阳台最近的天气变化。  
+第一个想到的当然是我的[气象站](https://github.com/Puhao/ecomesh)数据问题。我现在的数据直接转发到了[Yeelink](http://www.yeelink.net/)，顺便发发[微博](http://weibo.com/u/3551343502)。[平台曲线](http://www.yeelink.net/devices/3762#)展示了我阳台最近的天气变化。  
 但是我想着在这个blog也能展示曲线，我想到的就是我本来用raspberry pi采集数据的存储到本地MySQL数据库的，自己只需再写个后台服务程序，然后前端用个JQuery的库，比如Highcharts,前端还能做个ajax数据交互，实时更新。 
 我看了[别人的做法](http://hugozhu.myalert.info/)（其实我更想用山寨这个词语，我最擅长的就是模仿，Orz),直接使用了第三方的物联网平台--[xively](https://xively.com/)。  
 中国版的物联网开发平台相比之下，真的是模仿了它的外形，但是没有把其它一些辅助的功能做好。提供一个app-key，post接口让大家传数据，但是没有考虑到第三方网站的外链之类的。毕竟国内做物联网的平台的，boss更多是做嵌入式出身，身上少了些互联网基因。  

@@ -26,14 +26,15 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
   -->
+  <link rel="shortcut icon" href="http://tp4.sinaimg.cn/1353248403/50/22842818103/1">
   </head>
 
   <body>
-
+  <a href="https://github.com/Puhao"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/">Puhao&#39;s Blog</a>
+          <a class="brand" href="/">Puhao</a>
           <ul class="nav">
             
               
@@ -71,6 +72,12 @@
 
 
             
+            <li style="padding-left:10px">
+              <form class="navbar-search pull-right" method="GET" action="https://www.google.com/search">
+                <input type="text" name="as_q" class="search-query" placeholder=" 搜搜看... ">
+                <input type="hidden" name="as_sitesearch" value="blog.puhao.me">
+              </form>               
+            </li>
           </ul>
         </div>
       </div>
@@ -92,6 +99,70 @@
 
 
 <div class="post">
+  <h3 class="title"><a href="/FPGA/FPGA%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">FPGA图像处理</a> <span class="date">2013-08-24</span></h3>
+
+  <p>突然想写篇这方面的blog，主要是想着把N年前写的blog也汇总到这里来。以前曾经写过<a href="http://www.openhw.org/sain_1989/blog/12-05/279347_f3591.html">FPGA视频采集</a>和<a href="http://www.openhw.org/sain_1989/blog/12-07/281798_e0f79.html#articletop">FPGA存储控制器</a>,这正好涉及到了视频图像的采集，存储，应该把处理的尾巴给续上去。这儿不涉及到具体的技术细节，只是谈下整个设计流程，更像一篇科普文章。</p>
+
+<h2>图像获取</h2>
+
+<p><a href="http://www.openhw.org/sain_1989/blog/12-05/279347_f3591.html">FPGA视频采集</a>里面主要是提了一下如何获取PAL视频源的问题，通过AD转换芯片和时序逻辑组合获取原始像素。我们也可以直接从摄像头获取视频图像，以OV7670为例。<br />
+这是一款非常主流的摄像头，被用于很多嵌入式设备中。它支持标准的SCCB接口，兼容I2C接口，而且提供丰富的图像格式输出，包括RawRGB,RGB(GRB4:2:2,RGB565/<sup>555</sup>&frasl;<sub>444</sub>),YUV(4:2:2)和YCbCr(4:2:2)。<br />
+我们只需通过接口完成对芯片的配置，然后按照接口时序完成对摄像头输出的数据解析。根据我们后面的算法是基于YUV的或者RGB的来控制这款摄像头的视频输出格式，直接存储，方便后面的视频处理。<br />
+关于如何读取这款芯片的输出图像，可以去<a href="http://www.amobbs.com/forum.php">阿莫电子论坛</a>找下，里面有很多网友共享的实例。不过很多通过MCU来获取的（网站里也有FPGA获取的实例），考虑到MCU处理速度慢的缘故，有些模块还会加个FIFO来做帮助，用FPGA就可以直接获取了，不需要FIFO的帮助。</p>
+
+<h2>图像存储</h2>
+
+<p><a href="http://www.openhw.org/sain_1989/blog/12-07/281798_e0f79.html#articletop">FPGA存储控制器</a>介绍了Xilinx的MCB的使用。因为芯片出来的图像已经变成了顺序的的了，考虑到后面的图像处理算法，我们需要把一帧图像缓存下来，一般情况下我们会缓存好几帧图像。存储器我们可以考虑SRAM,SDRAM，DDR2等存储芯片。综合到图像的大小，存取速率问题，DDR2或者DDR3存储芯片是我们的首选，但是针对不同的存储芯片，在我们设计FIFO村读取的时候，还需要解决一个芯片控制器的问题。一种方法是去<a href="http://opencores.org/">OpenCores</a>上找开源的IP Core作为我们的存储控制器，另外一种方法就是使用FPGA芯片厂商给我们提供的硬核控制器。<br />
+以Xilinx的Spartan系列FPGA为例，它给用户提供了MCB这个硬核，存储控制模块，我们只需按照这个IP的时序就可以很轻松的完成视频图像的存储与读取。用硬核的一个好处就是不占用FPGA提供给我们的逻辑门，而且在速度上面也有很大的优势，而且很好的支持<a href="http://baike.baidu.com/view/2375625.htm">AXI</a>总线。</p>
+
+<h2>图像处理</h2>
+
+<p>看到这儿，一般做视频图像处理的人会觉得这也太麻烦了吧？我openCV里面直接一行代码就可以读取一帧图像了，到你这里怎么麻烦了？
+这里以使用USB摄像头为例，说明下图像处理的流程。我们的摄像头处理芯片通过感光元件(感光元件还有CMOS,CCD之分)获取了图像，并且通过USB输送PC机。USB的全称就是Universal Serial Bus，一种计算机总线，而我们的摄像头又有OS下的USB驱动，OS又完成了一次对图像的缓存，接口封装，因此用户软件只需通过OS接口就能直接读取图像了，把前面做的各种繁琐的步骤全部完成了。</p>
+
+<p>这个时候我们需要注意的是，以我们写的C++图像处理算法为例。计算机是如何处理执行我们的算法的？学过计算机组成的都知道，编译器将我们的代码编译出了汇编语言。计算机读取汇编程序，完成取值，译码，执行操作，一条条执行完我们的代码，又转换回了0101格式。从这个流程大家就知道了CPU做图像处理慢的劣势了，因此PC上又诞生了GPU，而在嵌入式领域有了DSP等专用处理芯片，两者的原理上是差不多的。<br />
+FPGA有一大天生的优势就是能够集成软件的易用与硬件的高效，因此FPGA也被人越来越多的运用到了图像处理领域。</p>
+
+
+  <div class="more">
+    <a href="/FPGA/FPGA%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/吐槽/%E4%BD%BF%E7%94%A8%E5%A4%9A%E8%AF%B4/">使用多说</a> <span class="date">2013-08-22</span></h3>
+
+  <p>Github不亏为程序员的Facebook，早上我在gor提交了一个issue说可以考虑支持下友言，结果作者下午就回复了，并且增加了这个功能，然后正好有另外的开发者完成了多说的挂件，然后发生的故事就是这个blog的评论由多说来负责了。</p>
+
+<h2>多说使用</h2>
+
+<p>本来只注意到友言，但正好看到gor里面有人实现了一个多说的挂件，然后看了一下多说，发现蛮不错的，真的做到了评论社交化，而且把友言和加网整合到一起整合的很好，这完全就是一个评论的SNS啊。<br />
+接下来的问题就是comments里面的config.yml配置问题了，结果蛋疼了，多说也是靠一个short<em>name绑定的，问题是怎么申请获取这个short_name。<br />
+看来多说官网，发现是申请多说二级域名，然后就能获得short_name了。多说的官网还反复提到神马后台管理啊，就是找不到申请二级域名的地方，这不是坑爹嘛。<br />
+最终，在我不断的寻找点击后，终于找到了那个链接：</em><a href="http://duoshuo.com/create-site/">获取多说通用代码</a>_<br />
+填写下申请内容，申请了puhaoblog.duoshuo.com，这样我的short_name就是puhaoblog，这样我再去配置下blog里面comment的config.yml，就搞定了。</p>
+
+<pre><code>layout : duoshuo
+duoshuo :
+  short_name : puhaoblog
+livefyre :
+  site_id : 123
+intensedebate :
+  account : 123abc
+facebook :
+  appid : 123
+  num_posts: 5
+  width: 580
+  colorscheme: light
+</code></pre>
+
+
+  <div class="more">
+    <a href="/吐槽/%E4%BD%BF%E7%94%A8%E5%A4%9A%E8%AF%B4/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
   <h3 class="title"><a href="/吐槽/Blog%E6%8A%98%E8%85%BE/">Blog折腾</a> <span class="date">2013-08-22</span></h3>
 
   <p>在程序界有一句话很流行,不要重复造轮子。哦，我不是来讨论<a href="http://taosay.net/?p=575">重复造轮子</a>这件事情的。<br />
@@ -99,7 +170,7 @@
 
 <h2>气象站数据</h2>
 
-<p>第一个想到的当然是我的<a href="https://github.com/Puhao/ecomesh">气象站</a>数据问题。我现在的数据直接转发到了<a href="http://www.yeelink.net/">Yeelink</a>，顺便发发<a href="点击查看微博">微博</a>。<a href="http://www.yeelink.net/devices/3762#">平台曲线</a>展示了我阳台最近的天气变化。<br />
+<p>第一个想到的当然是我的<a href="https://github.com/Puhao/ecomesh">气象站</a>数据问题。我现在的数据直接转发到了<a href="http://www.yeelink.net/">Yeelink</a>，顺便发发<a href="http://weibo.com/u/3551343502">微博</a>。<a href="http://www.yeelink.net/devices/3762#">平台曲线</a>展示了我阳台最近的天气变化。<br />
 但是我想着在这个blog也能展示曲线，我想到的就是我本来用raspberry pi采集数据的存储到本地MySQL数据库的，自己只需再写个后台服务程序，然后前端用个JQuery的库，比如Highcharts,前端还能做个ajax数据交互，实时更新。
 我看了<a href="http://hugozhu.myalert.info/">别人的做法</a>（其实我更想用山寨这个词语，我最擅长的就是模仿，Orz),直接使用了第三方的物联网平台&ndash;<a href="https://xively.com/">xively</a>。<br />
 中国版的物联网开发平台相比之下，真的是模仿了它的外形，但是没有把其它一些辅助的功能做好。提供一个app-key，post接口让大家传数据，但是没有考虑到第三方网站的外链之类的。毕竟国内做物联网的平台的，boss更多是做嵌入式出身，身上少了些互联网基因。<br />
