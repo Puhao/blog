@@ -4,6 +4,7 @@ date: '2013-08-24'
 description:
 categories:
 -FPGA
+-技术
 tags:
 -FPGA
 -Verilog
@@ -59,7 +60,7 @@ Simulink HDL Coder就是这么一个工具，我们还是可以在simulink里面
 <img src="{{urls.media}}/FPGA图像处理/wave.jpg" alt="" width="600">  
 主要是几个简单的三角函数关系
 
-这个时候我就直接使用了System Generator搭建了算法模型，然后生成的代码与其他Verilog代码整合到一块，有一点很讨厌的就是带上了System Generator生成代码的project，编译，布局布线耗费的时间特别长，让人难以接受，那个project从编译到最后生成bit需要花费4个小时，非常耗时。  
+这个时候我就直接使用了System Generator搭建了算法模型，一共有好几个System Generator算法模型，然后把生成的代码与其他Verilog代码整合到一块，有一点很讨厌的就是带上了System Generator生成代码的project，编译，布局布线耗费的时间特别长，让人难以接受，那个project从编译到最后生成bit需要花费4个小时，非常耗时。  
 
 关于System Generator，我非常推荐一本书：[《多媒体处理FPGA实现--System Generator篇》](http://item.jd.com/10067534.html),书里面很详细的介绍了如何使用System Generator来搭建一些基本的图像处理算法，通过System Generator可以很容易搭建一个Sobel边缘检测算法。  
 

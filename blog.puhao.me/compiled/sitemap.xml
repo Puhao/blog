@@ -4,6 +4,26 @@
 		<loc>http://blog.puhao.me/</loc>
 	</url>
 	<url>
+		<loc>http://blog.puhao.me/技术/Raspberry-Pi%E4%B8%8B%E4%BD%BF%E7%94%A8MongoDB/</loc>
+		<lastmod>2013-08-31</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://blog.puhao.me/算法/8%E6%9C%8830%E6%97%A5PAT%E8%80%83%E8%AF%95/</loc>
+		<lastmod>2013-08-30</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://blog.puhao.me/算法/Word-Ladder/</loc>
+		<lastmod>2013-08-28</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>http://blog.puhao.me/FPGA/NetFPGA/</loc>
+		<lastmod>2013-08-24</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://blog.puhao.me/FPGA/FPGA%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
 		<lastmod>2013-08-24</lastmod>
 		<changefreq>weekly</changefreq>

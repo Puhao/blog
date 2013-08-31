@@ -6,7 +6,6 @@ categories:
 - 吐槽
 tags:
 - 写作
-- Blog
 - GitHub
 
 ---

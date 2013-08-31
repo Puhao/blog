@@ -11,7 +11,7 @@ tags:
 - 加网
 - GitHub
 - Bootstrap
-- raspberry pi
+- Raspberry Pi
 - 气象站
 ---
 在程序界有一句话很流行,不要重复造轮子。哦，我不是来讨论[重复造轮子](http://taosay.net/?p=575)这件事情的。  

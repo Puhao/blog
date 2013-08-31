@@ -68,6 +68,13 @@
               
 
 
+  <li><a href="/weather">浙大天气</a></li>
+
+
+            
+              
+
+
   <li><a href="/about">About Me</a></li>
 
 
@@ -97,6 +104,159 @@
 
 <h2>最近更新</h2>
 
+
+<div class="post">
+  <h3 class="title"><a href="/技术/Raspberry-Pi%E4%B8%8B%E4%BD%BF%E7%94%A8MongoDB/">Raspberry Pi下使用MongoDB</a> <span class="date">2013-08-31</span></h3>
+
+  <p>其实我更想把标题改为Raspberry Pi下折腾MongoDB。在开始折腾前，先介绍一个linux下的工具。</p>
+
+<h2>安装准备</h2>
+
+<p>在很多场景下，我都是都是SSH登录到Linux主机进行操作的，而不是直接在Linux主机上面通过键盘操作。一旦我们断开连接，如果任务没有执行完，那这个我们在这个SSH下发起的任务都会被终止掉，这个时候我们借助screen可以很好的帮我们把这个问题解决掉。关于screen，推荐阅读下<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">《Linux技巧：使用screen管理你的远程会话》</a>,详细介绍了为什么会关闭，到怎么使用screen。<br />
+Raspberry Pi官方提供的镜像下面没有自带screen，因此需要我们先安装下。</p>
+
+<pre><code>sudo apt-get install screen
+</code></pre>
+
+<h2>安装MongoDB</h2>
+
+<p>由于没有官方镜像提供，我们选择以源码方式安装。</p>
+
+<ol>
+<li><p>相关工具安装</p>
+
+<pre><code>sudo apt-get install build-essential libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev scons libboost-all-dev git
+</code></pre></li>
+
+<li><p>获取源代码<br />
+MongoDB的源代码是基于x86机器的little endian的，Raspberry Pi的CPU是基于ARM的big endian，在github上面有big endian的<a href="https://github.com/skrabban/mongo-nonx86">nonx86版本</a>提供。</p></li>
+</ol>
+
+
+  <div class="more">
+    <a href="/技术/Raspberry-Pi%E4%B8%8B%E4%BD%BF%E7%94%A8MongoDB/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/算法/8%E6%9C%8830%E6%97%A5PAT%E8%80%83%E8%AF%95/">8月30日PAT考试</a> <span class="date">2013-08-30</span></h3>
+
+  <p>作为一名无证程序员，在即将找工作的情况下，我当然也随大流准备考个证，告别无证程序员生涯。然后现实生活无情的打击了我。</p>
+
+<h2>请无视这段吐槽，直接看下一段解答</h2>
+
+<p><a href="http://pat.zju.edu.cn/">PAT</a>考试是我们学校学院搞起的程序能力测试。我在报名缴费情况下，信心满满的第一次踏上了这样的考试，结果铩羽而归。考试用的计算机只有windows系统，没有linux，然后windows下面没有gcc，只有VS给你调试用。平常习惯了在sublime里面写代码，gcc的完美融合，让我用的十分顺手。我完全没有用过VS啊，VC6.0的时候还是会建立个consle工程的，然后VS里面最后貌似是成功创建出了工程，然后把sublime里面写的代码粘贴过去，各种报错，非常奇怪，然后我就放弃了，渣渣程序员，非法调试的话，做不到一次性成功啊。我猜测估计是文件编码不一样造成了这种奇怪的错误。然后就坐在那儿做题吧，考试肯定是0分了，尝试了几次提交，编译错误，然后根据错误信息再来改代码，太蛋疼了，还是放弃了，果断丢人的0分啊！没经验，too young，too simple, alway naive<br />
+回到实验室，在自己的MBP上面重新写了遍代码，但是OJ已经关闭了，不能测试最后写的程序。</p>
+
+<h2>题目分析解答</h2>
+
+<p>这次做的<a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30">题目</a>。<br />
+<a href="https://github.com/Puhao/PAT/tree/master/PAT(A)101-105-2-2013-08-30">题目解答</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30/A">Dating</a></h2>
+
+<p>主要是使用下STL的string，然后找到第一次相等，第二次相等的，然后控制输出格式。</p>
+
+<pre><code>void dating(string a,string b,string c,string d)
+{
+    char FstLet,SecLet;
+    int count = 0;
+    for(int i=0;i&lt;a.size();i++)
+    {
+        if ((a[i] == b[i]) &amp;&amp; (isupper(a[i])))
+        {
+            if (count == 0)
+            {
+                count = 1;
+                FstLet = a[i];
+            }
+            if (count == 1)
+            {
+                count = 2;
+                SecLet = a[i];
+            }
+        }
+    }
+    string Week[] = {&quot;MON&quot;, &quot;TUE&quot;, &quot;WED&quot;, &quot;THU&quot;, &quot;FRI&quot;,&quot;SAT&quot;,&quot;SUN&quot;};
+    int hour,minu;
+    if (isdigit(SecLet))
+        hour = SecLet - '0';
+    else
+        hour = SecLet - 'A' + 10;
+    count = 0;
+    for(int i=0;i&lt;c.size();i++)
+    {
+        if ( (c[i] == d[i]) &amp;&amp; (isalpha(c[i])) )
+        {
+            if (count == 0)
+            {
+                count = 1;
+                minu = i;
+            }
+        }
+
+    }
+    cout.fill('0');
+    cout &lt;&lt; Week[FstLet - 'A'] &lt;&lt; &quot; &quot; &lt;&lt; setw(2) &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; setw(2) &lt;&lt; minu &lt;&lt; endl;
+    return;
+
+}
+</code></pre>
+
+
+  <div class="more">
+    <a href="/算法/8%E6%9C%8830%E6%97%A5PAT%E8%80%83%E8%AF%95/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/算法/Word-Ladder/">Word Ladder</a> <span class="date">2013-08-28</span></h3>
+
+  <p>LeetCode上面有两道关于单词变换的题目。</p>
+
+<h2>Word Ladder</h2>
+
+<blockquote>
+<p>Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that:</p>
+
+<p>Only one letter can be changed at a time
+Each intermediate word must exist in the dictionary
+For example,</p>
+
+<p>Given:
+start = &ldquo;hit&rdquo;<br />
+end = &ldquo;cog&rdquo;<br />
+dict = [&ldquo;hot&rdquo;,&ldquo;dot&rdquo;,&ldquo;dog&rdquo;,&ldquo;lot&rdquo;,&ldquo;log&rdquo;]</p>
+
+<p>As one shortest transformation is &ldquo;hit&rdquo; -&gt; &ldquo;hot&rdquo; -&gt; &ldquo;dot&rdquo; -&gt; &ldquo;dog&rdquo; -&gt; &ldquo;cog&rdquo;,
+return its length 5.</p>
+
+<p>Note:</p>
+</blockquote>
+
+
+  <div class="more">
+    <a href="/算法/Word-Ladder/" class="btn">read more..</a>
+  </div>
+</div>
+
+<div class="post">
+  <h3 class="title"><a href="/FPGA/NetFPGA/">NetFPGA</a> <span class="date">2013-08-24</span></h3>
+
+  <p>自己是在大三暑假的时候接触到的<a href="http://netfpga.org/">NetFPGA</a>，那个时候正好是因为全国电子设计大赛信息安全邀请赛FPGA组使用的平台是NetFPGA，所以接触到了这个平台。
+我后来在OpenHW社区连载了<a href="http://www.openhw.org/sain_1989/blog/10-09/195099_f3e5f.html">NetFPGA开发指南</a> ,最后完成了一份<a href="http://www.openhw.org/blog/link2url.php?link=%2Fbbs%2Ffile_94193.html">NetFPGA开发指南1.1.pdf</a>的文档。</p>
+
+<p>那是自己用Verilog写的第一个比较大的project，自己Verilog的代码能力就是在那个项目里面得到的进步的。通过阅读别人写的优秀代码，的确能够进步很多。回头再看当初写的那份文档，其实更像是一份啰嗦版的step by step。</p>
+
+<p>因为那次比赛，我改变了很多，也许变的所谓的成熟了吧。当我读研之后，我也再没有接触过NetFPGA平台，不过通过这个平台让自己Verilog设计和网络二三层方面的知识得到了相当大的进步。也通过比赛，知道很多事情没必要看的太重，take it easy，just do it for fun。这样的态度改变在我的研究生生涯中得到了最好的体现，我折腾了各种有趣好玩的东西，以兴趣为导向玩的很开心，当自己开始要找工作，准备告别研究生生涯的这个时候，回头看，觉得自己过去的一段经历是那么的有趣，好玩，也因为自己对职业方向的规划，督促着自己不断学习着新的知识。</p>
+
+<p>认真投入去做一件事情，能够让自己受益很久，至少目前我是这样的。</p>
+
+
+  <div class="more">
+    <a href="/FPGA/NetFPGA/" class="btn">read more..</a>
+  </div>
+</div>
 
 <div class="post">
   <h3 class="title"><a href="/FPGA/FPGA%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">FPGA图像处理</a> <span class="date">2013-08-24</span></h3>
@@ -263,10 +423,10 @@ facebook :
       </div>
 
       <footer>
-        <p>&copy; Puhao Yuan 2013 
+        <p>&copy; Puhao Yuan  <a href='http://me.alipay.com/yuanpuhao'> <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png' /> </a>2013 
           with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
-		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cdiv id='cnzz_stat_icon_1000046623'%3E%3C/div%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000046623%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
         </p>
       </footer>
 

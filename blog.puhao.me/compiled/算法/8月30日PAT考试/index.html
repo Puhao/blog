@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>8月30日PAT考试</title>
+  
+    <meta name="description" content="PAT考试">
+  
+    <meta name="author" content="Puhao Yuan">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  <link rel="shortcut icon" href="http://tp4.sinaimg.cn/1353248403/50/22842818103/1">
+  </head>
+
+  <body>
+  <a href="https://github.com/Puhao"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Puhao</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/weather">浙大天气</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About Me</a></li>
+
+
+            
+            <li style="padding-left:10px">
+              <form class="navbar-search pull-right" method="GET" action="https://www.google.com/search">
+                <input type="text" name="as_q" class="search-query" placeholder=" 搜搜看... ">
+                <input type="hidden" name="as_sitesearch" value="blog.puhao.me">
+              </form>               
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>8月30日PAT考试 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>作为一名无证程序员，在即将找工作的情况下，我当然也随大流准备考个证，告别无证程序员生涯。然后现实生活无情的打击了我。</p>
+
+<h2>请无视这段吐槽，直接看下一段解答</h2>
+
+<p><a href="http://pat.zju.edu.cn/">PAT</a>考试是我们学校学院搞起的程序能力测试。我在报名缴费情况下，信心满满的第一次踏上了这样的考试，结果铩羽而归。考试用的计算机只有windows系统，没有linux，然后windows下面没有gcc，只有VS给你调试用。平常习惯了在sublime里面写代码，gcc的完美融合，让我用的十分顺手。我完全没有用过VS啊，VC6.0的时候还是会建立个consle工程的，然后VS里面最后貌似是成功创建出了工程，然后把sublime里面写的代码粘贴过去，各种报错，非常奇怪，然后我就放弃了，渣渣程序员，非法调试的话，做不到一次性成功啊。我猜测估计是文件编码不一样造成了这种奇怪的错误。然后就坐在那儿做题吧，考试肯定是0分了，尝试了几次提交，编译错误，然后根据错误信息再来改代码，太蛋疼了，还是放弃了，果断丢人的0分啊！没经验，too young，too simple, alway naive<br />
+回到实验室，在自己的MBP上面重新写了遍代码，但是OJ已经关闭了，不能测试最后写的程序。</p>
+
+<h2>题目分析解答</h2>
+
+<p>这次做的<a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30">题目</a>。<br />
+<a href="https://github.com/Puhao/PAT/tree/master/PAT(A)101-105-2-2013-08-30">题目解答</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30/A">Dating</a></h2>
+
+<p>主要是使用下STL的string，然后找到第一次相等，第二次相等的，然后控制输出格式。</p>
+
+<pre><code>void dating(string a,string b,string c,string d)
+{
+    char FstLet,SecLet;
+    int count = 0;
+    for(int i=0;i&lt;a.size();i++)
+    {
+        if ((a[i] == b[i]) &amp;&amp; (isupper(a[i])))
+        {
+            if (count == 0)
+            {
+                count = 1;
+                FstLet = a[i];
+            }
+            if (count == 1)
+            {
+                count = 2;
+                SecLet = a[i];
+            }
+        }
+    }
+    string Week[] = {&quot;MON&quot;, &quot;TUE&quot;, &quot;WED&quot;, &quot;THU&quot;, &quot;FRI&quot;,&quot;SAT&quot;,&quot;SUN&quot;};
+    int hour,minu;
+    if (isdigit(SecLet))
+        hour = SecLet - '0';
+    else
+        hour = SecLet - 'A' + 10;
+    count = 0;
+    for(int i=0;i&lt;c.size();i++)
+    {
+        if ( (c[i] == d[i]) &amp;&amp; (isalpha(c[i])) )
+        {
+            if (count == 0)
+            {
+                count = 1;
+                minu = i;
+            }
+        }
+
+    }
+    cout.fill('0');
+    cout &lt;&lt; Week[FstLet - 'A'] &lt;&lt; &quot; &quot; &lt;&lt; setw(2) &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; setw(2) &lt;&lt; minu &lt;&lt; endl;
+    return;
+
+}
+</code></pre>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30/B">Talent and Virtue</a></h2>
+
+<p>一次读入学生信息，然后归类把不同学生放到不同的vector里面，然后单独sort下，然后输出。</p>
+
+<pre><code>struct student
+{
+    long long int id;
+    int virtue;
+    int talent;
+    student(long long int i,int v,int t):id(i),virtue(v),talent(t){}
+    /* data */
+};
+
+bool compare_less(const student &amp;a,const student &amp;b)
+{
+    return ((a.virtue + a.talent) &gt; (b.virtue + b.talent));
+}
+
+int main()
+{
+    int num,low,high;
+    cin &gt;&gt; num &gt;&gt; low &gt;&gt; high;
+    int count = 0;
+    long long int id;
+    int virtue;
+    int talent;
+    vector&lt;student&gt; stu[4];
+    while(num--)
+    {
+        cin &gt;&gt; id &gt;&gt; virtue &gt;&gt; talent;
+        if ((virtue &lt; low) || (talent &lt; low))
+        {
+            continue;
+        }
+        count++;
+        if ((virtue &gt;= high) &amp;&amp; (talent &gt;= high))
+        {
+            stu[0].push_back(student(id,virtue,talent));
+        }
+        else if ((virtue &gt;= high) &amp;&amp; (talent &lt; high))
+        {
+            stu[1].push_back(student(id,virtue,talent));
+        }
+        else if ((virtue &lt; high) &amp;&amp; (talent &lt; high) &amp;&amp; (virtue &gt;= talent))
+        {
+            stu[2].push_back(student(id,virtue,talent));
+        }
+        else
+        {
+            stu[3].push_back(student(id,virtue,talent));
+        }       
+    }
+    for(int i=0;i&lt;4;i++)
+    {
+        sort(stu[i].begin(), stu[i].end(),compare_less);
+    }
+    cout &lt;&lt; count &lt;&lt; endl;
+    for(int i=0;i&lt;4;i++)
+    {
+        vector&lt;student&gt;::const_iterator it;
+        for(it = stu[i].begin(); it != stu[i].end(); it++)
+        {
+            cout &lt;&lt; it-&gt;id &lt;&lt; &quot; &quot; &lt;&lt; it-&gt;virtue &lt;&lt; ' ' &lt;&lt; it-&gt;talent &lt;&lt; endl;
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30/C">Set Similarity</a></h2>
+
+<p>用STL的set，然后把所有的输入维护成一个元素为set的vector.</p>
+
+<pre><code>double set_similarity(set&lt;int&gt; a,set&lt;int&gt; b)
+{
+    double pub = 0;
+    set&lt;int&gt;::const_iterator it;
+    for (it=a.begin();it!=a.end();it++)
+    {
+        if(b.count(*it))
+            pub++;
+    }
+    return 100 * pub / (a.size() + b.size() - pub);
+}
+
+int main()
+{
+    vector&lt;set&lt;int&gt; &gt; AllSet;
+    set&lt;int&gt; TmpSet;
+    int num,cnt;
+    cin &gt;&gt; num;
+    int index = 0;
+    int tmp;
+    while(index != num)
+    {
+        TmpSet.clear();
+        cin &gt;&gt; cnt;
+        while (cnt--)
+        {
+            cin &gt;&gt; tmp;
+            TmpSet.insert(tmp);
+        }
+        AllSet.push_back(TmpSet);
+        index++;
+    }
+    cin &gt;&gt; num;
+    int one,two;
+    while(num--)
+    {
+        cin &gt;&gt; one &gt;&gt; two;
+        double resutl = set_similarity(AllSet[one-1],AllSet[two-1]);
+        cout &lt;&lt; setiosflags(ios::fixed)&lt;&lt; setprecision(1) &lt;&lt;resutl &lt;&lt; &quot;%&quot; &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-101-105-2-2013-08-30/D">Complete Binary Search Tree</a></h2>
+
+<p>刚看到这道题目的时候，第一反应就是像最大堆那样建堆，不同的是这个堆是个二叉查找堆，然后每次进行堆元素的插入，但思考下发现这个插入新元素，堆的交换并不像最大堆那样简单。
+后来想到，其实这棵树的中序遍历就是一个排列好的数组，因此利用这个性质，我们把元素从小到大，依次填入CBST这个数组中。</p>
+
+<pre><code>struct Node
+{
+    int val;
+    Node *left;
+    Node *right;
+    Node(int v):val(v){}
+    /* data */
+};
+
+void BuildArray(int index,int &amp;pos,vector&lt;int&gt; &amp;v,vector&lt;int&gt; &amp;cbst,int m)
+{
+    if (index &gt;=m)
+        return;
+    //先填左子树，然后填自己，最后填右子树
+    BuildArray(index*2 + 1,pos,v,cbst,m);
+    cbst[index] = v[pos++];
+    BuildArray(index*2 + 2,pos,v,cbst,m);
+    return;
+}
+
+
+int main()
+{
+    int num;
+    cin &gt;&gt; num;
+    int count = num;
+    std::vector&lt;int&gt; v;
+    vector&lt;int&gt; cbst(num,0);
+    int tmp;
+    while(count--)
+    {
+        cin &gt;&gt; tmp;
+        v.push_back(tmp);
+    }
+    sort(v.begin(), v.end());
+    int pos = 0;
+    BuildArray(0,pos,v,cbst,num);
+    for(int i=0;i&lt;num;i++)
+    {
+        cout &lt;&lt; cbst[i] &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/技术/Raspberry-Pi%E4%B8%8B%E4%BD%BF%E7%94%A8MongoDB/" title="Raspberry Pi下使用MongoDB">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/算法/Word-Ladder/" title="Word Ladder">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+	<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"puhaoblog"};//require,replace your short_name
+	(function() {
+					var ds = document.createElement('script');
+					ds.type = 'text/javascript';ds.async = true;
+					ds.src = 'http://static.duoshuo.com/embed.js';
+					ds.charset = 'UTF-8';
+					(document.getElementsByTagName('head')[0] 
+					|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- Duoshuo Comment END -->	
+	
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-08-30</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E7%AE%97%E6%B3%95-ref">算法 <span>2</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#PAT-ref">PAT <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#BST-ref">BST <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#C%2B%2B-ref">C++ <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#Sublime-ref">Sublime <span>1</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; Puhao Yuan  <a href='http://me.alipay.com/yuanpuhao'> <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png' /> </a>2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cdiv id='cnzz_stat_icon_1000046623'%3E%3C/div%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000046623%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-43356274-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

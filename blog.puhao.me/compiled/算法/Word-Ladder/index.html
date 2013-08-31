@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Word Ladder</title>
+  
+    <meta name="author" content="Puhao Yuan">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  <link rel="shortcut icon" href="http://tp4.sinaimg.cn/1353248403/50/22842818103/1">
+  </head>
+
+  <body>
+  <a href="https://github.com/Puhao"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Puhao</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/weather">浙大天气</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About Me</a></li>
+
+
+            
+            <li style="padding-left:10px">
+              <form class="navbar-search pull-right" method="GET" action="https://www.google.com/search">
+                <input type="text" name="as_q" class="search-query" placeholder=" 搜搜看... ">
+                <input type="hidden" name="as_sitesearch" value="blog.puhao.me">
+              </form>               
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>Word Ladder </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>LeetCode上面有两道关于单词变换的题目。</p>
+
+<h2>Word Ladder</h2>
+
+<blockquote>
+<p>Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that:</p>
+
+<p>Only one letter can be changed at a time
+Each intermediate word must exist in the dictionary
+For example,</p>
+
+<p>Given:
+start = &ldquo;hit&rdquo;<br />
+end = &ldquo;cog&rdquo;<br />
+dict = [&ldquo;hot&rdquo;,&ldquo;dot&rdquo;,&ldquo;dog&rdquo;,&ldquo;lot&rdquo;,&ldquo;log&rdquo;]</p>
+
+<p>As one shortest transformation is &ldquo;hit&rdquo; -&gt; &ldquo;hot&rdquo; -&gt; &ldquo;dot&rdquo; -&gt; &ldquo;dog&rdquo; -&gt; &ldquo;cog&rdquo;,
+return its length 5.</p>
+
+<p>Note:</p>
+
+<p>Return 0 if there is no such transformation sequence.<br />
+All words have the same length.<br />
+All words contain only lowercase alphabetic characters.</p>
+</blockquote>
+
+<p>由于需要找到最短的变换路径，因此使用BFS查找，相同深度的在同一轮遍历每个单词进行检查是否有下一个跳转的路径，因此从单词首位开始到末位，每次只能变换一个位置，如果变换的单词在dict中，则加入队列，供下一轮遍历查找。当找到最终跳转单词的时候，返回当前遍历的深度即可。</p>
+
+<pre><code>int ladder(string start, string end, set&lt;string&gt; &amp;dict)
+{
+    if (start == end)
+        return 1;
+    int step = 1;
+    queue&lt;string&gt; q;
+    q.push(start);
+    while(q.size()) //BFS队列有元素就继续查找
+    {
+        step++;
+        int len = q.size();
+        while(len--)    //相同深度的节点数目
+        {
+            string check = q.front();
+            for(int i = 0; i&lt;check.size(); i++)
+            {
+                char tmp = check[i];
+                for(char j='a'; j&lt;='z'; j++)
+                {
+                    check[i] = j;
+                    if (check == end)
+                        return step;
+                    if (dict.count(check))
+                    {
+                        q.push(check);  
+                        dict.erase(check);
+                    }
+        
+                }
+                check[i] = tmp;
+            }
+            q.pop();
+        }
+    }
+    return 0;
+}
+</code></pre>
+
+<h2>Word Ladder 2</h2>
+
+<blockquote>
+<p>Given two words (start and end), and a dictionary, find all shortest transformation sequence(s) from start to end, such that:</p>
+
+<p>Only one letter can be changed at a time
+Each intermediate word must exist in the dictionary
+For example,</p>
+
+<p>Given:<br />
+start = &ldquo;hit&rdquo;<br />
+end = &ldquo;cog&rdquo;<br />
+dict = [&ldquo;hot&rdquo;,&ldquo;dot&rdquo;,&ldquo;dog&rdquo;,&ldquo;lot&rdquo;,&ldquo;log&rdquo;]</p>
+
+<p>Return</p>
+
+<blockquote>
+<p>[<br />
+   [&ldquo;hit&rdquo;,&ldquo;hot&rdquo;,&ldquo;dot&rdquo;,&ldquo;dog&rdquo;,&ldquo;cog&rdquo;],<br />
+   [&ldquo;hit&rdquo;,&ldquo;hot&rdquo;,&ldquo;lot&rdquo;,&ldquo;log&rdquo;,&ldquo;cog&rdquo;]<br />
+ ]</p>
+</blockquote>
+
+<p>Note:</p>
+
+<p>All words have the same length.<br />
+All words contain only lowercase alphabetic characters.</p>
+</blockquote>
+
+<p>这个时候，我们需要多维护一个目录，就是每个单词的前序列表，这个单词可以由哪几个单词到达，每个单词的前序列表其实是一个set（没有重复元素），这里有一个小陷阱，那就是每一轮遍历的时候，找到dict中有的元素，不能马上删除dict中的元素，要等到这轮遍历完毕，因为有可能还有其他单词能够到达这个单词，同时这个单词也不能马上放入队列供下一轮查找，首先要检查这一轮的时候是否已经放置过这个单词，防止下一轮遍历检查的单词有重复。当我们通过BFS查找到变化序列的时候，根据每个单词的前序单词，使用DFS来输出所有可到达路径。</p>
+
+<pre><code>//查看每个单词的前序序列
+void PrintPreList(map&lt;string,vector&lt;string&gt; &gt; &amp;LadPre)
+{
+    map&lt;string,vector&lt;string&gt; &gt;::const_iterator  it;
+    vector&lt;string&gt;::const_iterator vt_it;
+    for (it = LadPre.begin();it != LadPre.end();it++)
+    {
+        cout &lt;&lt; it-&gt;first &lt;&lt; &quot;:&quot;;
+        for(vt_it=(it-&gt;second).begin();vt_it &lt; (it-&gt;second).end(); vt_it++)
+        {
+            cout &lt;&lt; *vt_it &lt;&lt; &quot; &quot;;
+        }
+        cout &lt;&lt; endl;
+    }
+    return;
+}
+
+//根据前序序列，通过DFS找到所有路径
+void FindPath(map&lt;string,vector&lt;string&gt; &gt; &amp;LadPre, vector&lt;vector&lt;string&gt; &gt; &amp;LadRoad,string start,string end,vector&lt;string&gt; &amp;OneRoad)
+{
+    if (start == end)
+    {
+        OneRoad.push_back(start);
+        reverse(OneRoad.begin(), OneRoad.end());
+        LadRoad.push_back(OneRoad);
+        reverse(OneRoad.begin(), OneRoad.end());
+        OneRoad.pop_back();
+        return;
+    }
+    OneRoad.push_back(end);
+    vector&lt;string&gt;::const_iterator it;
+    vector&lt;string&gt; list = LadPre[end];
+    for (it=list.begin(); it &lt; list.end(); it++)
+    {
+        FindPath(LadPre,LadRoad,start,*it,OneRoad);
+    }
+    OneRoad.pop_back();
+    return;
+}
+
+//BFS查找最少变化路径
+vector&lt;vector&lt;string&gt; &gt; findLadders(string start, string end, set&lt;string&gt; &amp;dict) 
+{
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+    vector&lt;vector&lt;string&gt; &gt; LadRoad;
+    vector&lt;string&gt; OneRoad;
+    map&lt;string,vector&lt;string&gt; &gt;LadPre;  //记录每个单词，在相同最少跳跃次数下可以由哪几个单词跳转来到
+    if (start == end)
+        return LadRoad;
+
+    queue&lt;string&gt;   LadQue;
+    queue&lt;string&gt;   DelQue;
+    set&lt;string&gt; RoundSet;   //确保每轮queue入队的元素没有重复的
+
+    LadQue.push(start);
+    //有一个小陷阱，如果开始的元素已经在dict里面，在变化检索的时候会产生重复元素
+    //if(dict.count(start))
+    //  dict.erase(start);
+    bool FindEnd = false;
+    while(!LadQue.empty())
+    {
+        int length = LadQue.size();
+        while(length--)
+        {
+            string check = LadQue.front();
+            string PreWord = check;
+            for(int i=0; i&lt;check.size(); i++)
+            {
+                char tmp = check[i];    //每次变化一位
+                for(char j='a'; j&lt;='z'; j++)
+                {
+                    check[i] = j;
+                    if (check == end)
+                    {
+                        LadPre[check].push_back(PreWord);
+                        FindEnd = true;                     
+                    }
+                    else if (dict.count(check)) //if the string is in dict
+                    {
+                        if (!RoundSet.count(check))
+                        {
+                            RoundSet.insert(check);
+                            DelQue.push(check);     //这个深度的全部检查完之后，才能从dict中删除
+                            LadQue.push(check);
+                        }
+                        LadPre[check].push_back(PreWord);
+                    }
+                }
+                check[i] = tmp;
+            }
+            LadQue.pop();   //单词检查完毕,出队
+        }
+        RoundSet.clear();
+
+        if (FindEnd)    //在这个深度的时候找到了最终跳转结果
+        {
+            //PrintPreList(LadPre);
+            FindPath(LadPre,LadRoad,start,end,OneRoad);
+            return LadRoad;
+        }
+
+        while(!DelQue.empty())
+        {
+            string tmp = DelQue.front();
+            dict.erase(tmp);
+            DelQue.pop();
+        }
+    }
+    return LadRoad;    
+}
+</code></pre>
+
+<p><a href="https://github.com/Puhao/leetcode">点击我</a>查看更多LeetCode题目解答。</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/算法/8%E6%9C%8830%E6%97%A5PAT%E8%80%83%E8%AF%95/" title="8月30日PAT考试">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/FPGA/NetFPGA/" title="NetFPGA">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+	<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"puhaoblog"};//require,replace your short_name
+	(function() {
+					var ds = document.createElement('script');
+					ds.type = 'text/javascript';ds.async = true;
+					ds.src = 'http://static.duoshuo.com/embed.js';
+					ds.charset = 'UTF-8';
+					(document.getElementsByTagName('head')[0] 
+					|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- Duoshuo Comment END -->	
+	
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-08-28</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E7%AE%97%E6%B3%95-ref">算法 <span>2</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#LeetCode-ref">LeetCode <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#BFS-ref">BFS <span>1</span></a>
+</li>
+    
+      <li>
+  <a href="/tags/#DFS-ref">DFS <span>1</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; Puhao Yuan  <a href='http://me.alipay.com/yuanpuhao'> <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png' /> </a>2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cdiv id='cnzz_stat_icon_1000046623'%3E%3C/div%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000046623%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-43356274-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>
